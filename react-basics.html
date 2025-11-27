@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+        const button = <button>hello</button>;
+        const paragraph = <p>this is paragraph</p>
+        const div =( 
+            <div>
+             <button>hello</button>
+             <p>this is paragraph and if we write like this = {2+2}</p>
+            
+            </div>
+        );
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(div);
+    </script>
+  </body>
+</html>
+
+<!-- ReactDOM.createRoot(container) = sets up react. everything will be displayed here
+ .render = means to display something-->
+
+<!-- Babel = is a js compiler. translatets other languages into js.-->
+<!-- we use jsx in react. it's js with html-->
+<!-- web browser doesn't understand jsx. inorder to make it understand, we use Babel external library and give <script type="text/babel">//jsx here</script>-->
+<!-- we can't render multiple elements at once but we can render a parent element that has multiple elements-->
