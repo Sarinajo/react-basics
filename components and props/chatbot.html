@@ -21,9 +21,39 @@
         );
       }
 
+      function ChatMessage({message,sender}){
+        //const message = props.message;
+        //const sender = props.sender;
+        //const {message,sender} = props;
+
+        if(sender === 'robot'){
+          return(
+            <div>
+              <img src="robot.png" width="50" />
+              {message}
+            </div>
+
+          );
+
+        }
+        return(
+          <div>
+            {message}
+            <img src="user.png" width="50" />
+          </div>
+        );
+      }
+      //because in html div is an block element and will take an entire line by itself
+      //components can be resued. like we can reuse ChatMessage() for bot message
+      // components get parameters called props(properties)
+
       const app = (
         <>
         <ChatInput />
+        <ChatMessage message ="hello chatbot" sender="user" />
+        <ChatMessage message ="Hello! How can I help you?" sender="robot" />
+        <ChatMessage message="can you get me today's date?" sender="user" />
+        <ChatMessage message="Today is November 28 " sender="robot" />
         </>
 
       );
