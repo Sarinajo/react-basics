@@ -68,10 +68,40 @@
       //instead of using variable like const to create app, we can use component
 
       function App(){
+        const chatMessage = [
+          {message:'hello chatbot',
+            sender:'user',
+            id: 'id1' /*every obaject should have unique key */
+          },{
+            message: "hello ! how can i help you",
+            sender: 'robot',
+            id: 'id2'
+          },{
+            message: "can you get me today's date?",
+            sender: 'user',
+            id: 'id3'
+          },{
+            message: "Today is December 1",
+            sender: 'robot',
+            id: 'id4'
+          }];
+
+         const chatMessageComponents = chatMessage.map((chatMessage)=>{
+            return(
+              <ChatMessage
+              message = {chatMessage.message}
+              sender = {chatMessage.sender}
+              key = {chatMessage.id}
+              />
+            )
+          });
         return(
           <>
-          <ChatInput />
-          <ChatMessage 
+         <ChatInput />
+         {chatMessageComponents}
+
+          {/* if we do this. we will ahve to manually do it. so instead we will use a list object and use map function to map over the objects.this way we generate our html using javascript 
+            <ChatMessage 
             message = "hello chatbot"
             sender = "user"
           />
@@ -86,7 +116,7 @@
           <ChatMessage
             message = " Today is September 27"
             sender = "robot"
-          />
+          /> */ }
           </>
 
           )

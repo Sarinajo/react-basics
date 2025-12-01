@@ -1,53 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container"></div>
-     <script src="https://unpkg.com/supersimpledev/react.js"></script>
-    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
-    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
-    <script type="text/babel">
-        function Productdetails({product,price,discountprice,image}){
-            return(
-                <>
-                <p>{product}</p>
-                <p>Price : {price}</p>
-                {discountprice && (
-                    <p>Discounted Price: {discountprice}</p>
-                )}
-               
-                <div>
-                    <img src={image} width="50" />
-                 </div>
-                <button>Add to cart</button>
-
-                </>
-
-            );
-        }
-        function App(){
-            return(
-                <>
-                <Productdetails
-                    product ="cotton socks"
-                    price = "$3.00"
-                    discountprice = "$4.00"
-                    image = "cotton-socks.png"
-                 />
-                <Productdetails
-                    product = "tennis ball"
-                    price = "$4.00"
-                    image = "tennis-balls.png"
-                 />
-                </>
-            );
-        }
-        const container = document.querySelector('.container');
-        ReactDOM.createRoot(container).render(<App />)
-    </script>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head> 
+    <body>
+        <div class="container"></div>
+        <script src="https://unpkg.com/supersimpledev/react.js"></script>
+        <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+        <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+        <script type="text/babel">
+            function Productdetails({product,price,discountprice,image}){
+                return(
+                    <>
+                    <p>{product}</p>
+                    <p>Price : {price}</p>
+                    {discountprice && (
+                        <p>Discounted Price: {discountprice}</p>
+                    )}
+                    <div>
+                        <img src={image} width="50" />
+                    </div>
+                    <button>Add to cart</button>
+                    </>
+                );
+            }
+            function App(){
+                return(
+                    <>
+                    <Productdetails
+                        product ="cotton socks"
+                        price = "$3.00"
+                        discountprice = "$4.00"
+                        image = "cotton-socks.png"
+                    />
+                    <Productdetails
+                        product = "tennis ball"
+                        price = "$4.00"
+                        image = "tennis-balls.png"
+                    />
+                    </>
+                );
+            }
+            const container = document.querySelector('.container');
+            ReactDOM.createRoot(container).render(<App />)
+        </script>
+    </body>
+    </html>
