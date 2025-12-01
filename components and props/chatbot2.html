@@ -34,8 +34,9 @@
                 </div>
             )
         }
+        /* so we save the data in useState and react useState returns the data in array. array[0] is the current data. and the updated data is in next. let's say array[1] which is the function that lets us updat ethe data*/
         function ChatMessages(){
-                const chatmessage =[
+            const array =React.useState([
                     {
                         message: 'hello chatbot',
                         sender :'user',
@@ -56,23 +57,49 @@
                         sender:'robot',
                         id:'id4'
 
-                    }
-                ];
-                const chatMessageComponents = chatmessage.map((chatmessage)=>{
-                    return(
-                        <ChatMessage
-                        message = {chatmessage.message}
-                        sender = {chatmessage.sender} 
-                        key = {chatmessage.id}
-                        />
-                    )
+                    }]);
+            const chatMessages= array[0];
+            const setChatMessages= array[1];
+/* the function is used to update the data. which starts with set foreg here set and then data name ChatMessages.*/
+                
+/*however if we use function. react will not update the html so we use state.it's used to update the html*/
+                function sendmessage(){
+                    setChatMessages([
+                        ...chatMessages,
+                        {
+                            message: 'thank you',
+                            sender: 'user',
+                            id: crypto.randomUUID()
 
-                });
+                        }
+                    ]);
+                    /*chatmessage.push({
+                        message : 'thank you',
+                        sender:'user',
+                        id: crypto.randomUUID()
+                    });
+
+                    console.log(chatmessage);
+                    in react we shouldn't update the data directly but rather use the copy. using spread operator ...*/
+
+
+                }
+
                 return(
                     <>
-                    {chatMessageComponents}
-                    </>
-                )
+                        <button onClick={sendmessage}>send message</button>
+
+                        {chatMessages.map((chatMessages)=>{
+                         return(
+                            <ChatMessage
+                            message = {chatMessages.message}
+                            sender = {chatMessages.sender} 
+                            key = {chatMessages.id}
+                            />
+                            );
+                        })}
+                     </>
+                    )
         }
         function App(){
             return(
