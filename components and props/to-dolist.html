@@ -11,8 +11,84 @@
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+        function Input({tasks,setTasks}){
+            const [inputText,setInputText] =React.useState('');
+            function saveInputText(e){
+                setInputText(e.target.value);
+                if(e.key === 'Enter')
+                {
+                    sendMessage();
+                }
+                if(e.key === 'Escape')
+                {
+                    setInputText('');
+                }
+            }
+            function sendMessage(){
+                setTasks([
+                    ...tasks,
+                    {
+                        id:crypto.randomUUID(),
+                        text:inputText,
+                        completed:false
+                    }
+                ]);
+                setInputText('');
+            }
+            return
+            (
+                <>
+                <input placeholder="enter your task" 
+                onChange={saveInputText}
+                onKeyDown = {saveInputText}
+                value = {inputText}/>
+                <button onClick={sendMessage}>Save</button>
+                </>
+            )
+        }
+        function TaskList({tasks}){
+            return(
+                <>
+                {tasks.map((task) => {
+                 return <li key={task.id}>{task.text}</li>
+                 })}
+                </>
+            )
+        }
+        function ToDoList({tasks}){
+            return(
+                <>
+                <ul>
+                   <TaskList
+                    tasks = {tasks}
+                   />
+                 </ul>
+                </>
+            )
+        }
+        function App(){
+            const [tasks,setTasks]= React.useState([
+                {
+                    id:crypto.randomUUID(),
+                    text : 'buy milk',
+                    completed : false
+                }
+            ]);
+            return(
+                <>
+                <Input
+                tasks = {tasks}
+                 setTasks = {setTasks}
+                  />
+                <ToDoList 
+                tasks = {tasks}
+                />
+                </>
+            )
+        }
         const container = document.querySelector('.container');
-        
+        ReactDOM.createRoot(container).render(<App />);
+
     </script>
 </body>
 </html>
