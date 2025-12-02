@@ -20,8 +20,12 @@
                 
             function saveInputText(event){
                 setInputText(event.target.value);
+                if(event.key === 'Enter'){
+                    sendMessage();
+                }
+                
             }
-            function sendMessage(){
+            async function sendMessage(){
                 //we are in ChatInput component and not in ChatMessages component which is why we can't access the chatMessages/ so we use lifiting the state up
                 const newChatMessages =[
                         ...chatMessages,
@@ -35,7 +39,7 @@
                     ];
                     setChatMessages(newChatMessages);
 
-                    const response = Chatbot.getResponse(inputText);
+                    const response = await Chatbot.getResponseAsync(inputText);
                     setChatMessages ([
                         ...newChatMessages,
                         {
@@ -52,6 +56,7 @@
                  placeholder="send message to chatbot" 
                 size = "30"
                 onChange ={saveInputText}
+                onKeyDown={saveInputText}
                 value = {inputText}
                 />
                 <button 

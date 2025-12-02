@@ -27,7 +27,8 @@
                     setInputText('');
                 }
             }
-            function sendMessage(){
+            async function sendMessage(){
+                
                 //we are in ChatInput component and not in ChatMessages component which is why we can't access the chatMessages/ so we use lifiting the state up
                 const newChatMessages =[
                         ...chatMessages,
@@ -41,8 +42,10 @@
                     ];
                     setChatMessages(newChatMessages);
 
-                    const response = Chatbot.getResponse(inputText);
-                    setChatMessages ([
+                    const response = await Chatbot.getResponseAsync(inputText);
+                     
+                     chatbot.getResponseAsync(inputText);
+                     setChatMessages ([
                         ...newChatMessages,
                         {
                             message: response,
