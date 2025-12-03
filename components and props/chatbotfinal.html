@@ -39,6 +39,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            
 
         }
         .chat-message-user{
@@ -67,6 +68,13 @@
             margin-top: 20px;
             overflow: scroll;
             scrollbar-width: none
+        }
+        .welcome{
+            text-align: center;
+        }
+        .loading-spinner{
+            height: 40px;
+            margin: -15px;
         }
     </style>
 </head>
@@ -97,7 +105,15 @@
                         id: crypto.randomUUID()
                     }
                 ]
-                setChatMsg(newChatMessages);
+                setChatMsg([
+                    ...newChatMessages,
+                    {
+                        message: <img src="loading-spinner.gif" className="loading-spinner"/>,
+                        sender: 'robot',
+                        id: crypto.randomUUID()
+                    }
+                
+                ]);
                 const response = await Chatbot.getResponseAsync(inputText);
                 setChatMsg([
                     ...newChatMessages,
@@ -179,32 +195,10 @@
             //.map() lets us through the each value of array and convert it into a new value
         }
         function App(){
-             const [chatMsg,setChatMsg]=React.useState([
-                {
-                    message:"Hi",
-                    sender:'user',
-                    id:'id1'
-                },
-                {
-                    message:"Hello, How can i help",
-                    sender:'robot',
-                    id:'id2'
-
-                },
-                {
-                    message:"Can you get me today's date",
-                    sender:'user',
-                    id:'id3'
-
-                },
-                {
-                    message:"Sure,Today is December 2",
-                    sender:'robot',
-                    id:'id4'
-                }
-            ]);
+             const [chatMsg,setChatMsg]=React.useState([]);
             return(
                 <div className="app-container">
+                    {chatMsg.length === 0 && (<p className="welcome">Welcome to the chatbot project ! Send a message usingthe textbox below</p>)}
                 <ChatMessages
                 chatMsg={chatMsg}
                  />
