@@ -152,13 +152,19 @@
         }
         function ChatMessages({
             chatMsg}){
-            const chatMessageRaef = React.useRef(null);
+                 //now we want to use this effect when a message is created but inorder to get the div that has the Chatmessage we can't use DOM in react so use a another hook called useRef
+                // ref helps us save a html element.
+               const chatMessagesRef =  React.useRef(null);
             React.useEffect(()=>{
-               console.log( chatMessageRaef.current)
-            },[chatMsg]);
+
+           const containerElem = chatMessagesRef.current;
+           if(containerElem){
+            containerElem.scrollTop = containerElem.scrollHeight;
+           }
+            },[chatMsg]); //[] defines when the effect runs. it is called Dependency array.
+            
             return (
-                <div className="chat-messages-container"
-                ref={chatMessageRaef}>
+                <div className="chat-messages-container" ref={chatMessagesRef}>
                 {chatMsg.map((chat)=>{
                      return(
                          <ChatMessage
